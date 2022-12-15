@@ -1,2 +1,6 @@
 # quantum_espresso
-File's and data's related to Quantum espresso works
+Author : MIS AB V P
+Date of start : 15/12/2022
+
+Description :
+This repository contains files, instructions and various relevant data regarding the work on Quantum Espresso software, under Dr. Roshith KUniyil.
