@@ -1,6 +1,7 @@
 # quantum_espresso
-Author : MIS AB V P
-Date of start : 15/12/2022
+## Author : MIS AB V P
 
-Description :
+## Date of start : 12/15/2022
+
+## Description :
 This repository contains files, instructions and various relevant data regarding the work on Quantum Espresso software, under Dr. Roshith KUniyil.
