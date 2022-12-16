@@ -5,7 +5,9 @@ Copy the tar file downloaded to a desired directory from where we run the softwa
 
 Unzip the tar file.
 
-inside, the gennbo is the executable of the software.
+inside, the `gennbo` is the executable of the software.
+
+# 2. RUNNING
 
 *.47 type file are the input files for this executable and *.nbo are the output files.
 
