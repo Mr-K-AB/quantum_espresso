@@ -38,7 +38,7 @@ with this, `pw.x` or any other executable of Quantum Espresso can be called dire
 edit bashrc, add "EXPORT PATH " with <path>/pw.x as variable
 ### pw.x  : executable of espresso, in the /bin folder of espresso installation location.
 
-## Visualisation pakkages
+## Visualisation packages
 ### jmol:
 ```
 sudo apt-get install jmol

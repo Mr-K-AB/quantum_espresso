@@ -1,18 +1,32 @@
+
+
+
+
+
+
 ## scp commands to tranfer files between hosts.
 
 
 https://www.tecmint.com/scp-commands-examples/
+
+copy whole `folder` recursively to `directory`. 
+
+local to hpc
 ```
-<!-- copy whole <folder> recursively to <directory>  -->
-<!-- local to hpc -->
 scp -Cr <path>/<folder> <user>@192.168.1.31:<directory>/
+```
 
+copy whole `folder` recursively to `directory`.
 
-<!-- copy whole <folder> recursively to <directory>  -->
-<!-- hpc to local -->
+hpc to local
+```
 scp -Cr <user>@192.168.1.31:<path>/<folder> <directory>/
 ```
 
+For Syncing folders
+```
+rsync -avzP /home/user/MIS_AB misab@192.168.1.31:copied/MIS_AB
+```
 
 run ```bash configure``` in the directory to which Espresso is extracted.
 After, run ```make all``` from the same directory.
@@ -20,6 +34,15 @@ After, run ```make all``` from the same directory.
 nano ~/.bashrc
 ```
 add `export PATH=$PATH:/<path to bin of espresso's folder>`
+
+ctrl + s
+
+ctrl + x
+
+y
+
+ENTER
+
 ```
 source ~/.bashrc
 ```
