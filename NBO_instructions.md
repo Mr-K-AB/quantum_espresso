@@ -17,3 +17,11 @@ we have `<file_name_withno_47>.47` as one input file in our directory,
 ./gennbo <file_name_withno_47>
 ```
 this will create a `<file_name_withno_47>.nbo ` file as the output for this process, in the same directory.
+
+
+Directories of main NBO folder, bin folder of nbo were exported to path variable in ~/.bashrc
+
+
+
+In all of the gennbo, gaunbo7, gaunbo6 files, 
+BINDIR's set env values where modified to absolute path to the bin of nbo instead of path relative to nbo7 mainfolder which limits execution of gennbo from any directories. Else, we will have to run the gennbo, gaunbo7/6 from only the main folder of nbo7.
