@@ -1,12 +1,20 @@
 
 # PBS JOB SUBMISSION
 
-```
+```bash
 $ qsub -N <filename_without_extension> <script.sh>
 ```
-```
+```bash
 qstat
+
 qstat -u $USER
+```
+```bash
+qstat -n
+
+ssh node049
+
+logout
 ```
 
 ## Naming convention
