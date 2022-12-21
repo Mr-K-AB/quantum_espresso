@@ -13,7 +13,7 @@ inside, the `gennbo` is the executable of the software.
 
 eg: 
 we have `<file_name_withno_47>.47` as one input file in our directory,
-```
+```bash
 ./gennbo <file_name_withno_47>
 ```
 this will create a `<file_name_withno_47>.nbo ` file as the output for this process, in the same directory.
@@ -28,7 +28,7 @@ BINDIR's set env values where modified to absolute path to the bin of nbo instea
 
 ie, 
 In gennbo:
-```
+```bash
 #  First, give the path to the NBO7 binaries directory.
 
 # *********************************************************************************************************************************
@@ -38,7 +38,7 @@ setenv NBOBIN $HOME/copied/MIS_AB/Packages/NBO/nbo7/bin
 ```
 
 In gaunbo7/6:
-```
+```bash
 #  Specify NBO7 executable directory:
 
 # *********************************************************************************************************************************
