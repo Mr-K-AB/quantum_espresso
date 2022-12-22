@@ -1,0 +1,49 @@
+
+Contents of the nbo7/tests/gaussian/g16-b01 directory include:
+
+nbo7/tests/gaussian/g16-b01
+|-- CONTENTS          this file
+|-- am1.com           semiempirical calculation with deletions
+|-- c4h2.com          linearly-dependent basis set with deletions
+|-- casnbo.com        initial guess for CAS from NBO
+|-- ch3.com           open shell with deletions
+|-- ch3nh2.com        methylamine test case with deletions
+|-- cisd.com          NBO analysis of CI density
+|-- cuco.com          ECP calculation with NRT
+|-- freq.com          numerical frequencies with deletions
+|-- freq-ecl.com      numerical frequencies with deletions
+|-- h2o.com           extended basis set calculation
+|-- mp2.com           NBO analysis of MP2 density
+|-- nbcp.com          NBCP analysis
+|-- ncs.com           NMR properties with NCS
+|-- npa.com           NPA only
+|-- npepa.com         NPEPA calculation
+|-- opt.com           NBO analysis with geometry optimization
+|-- reopt.com         numerical optimization with deletions
+|-- reopt-ecl.com     numerical optimization with deletions
+|-- save.com          checkpoint NBOs (savenbos)
+`-- tutdel.com        See http://nbo7.chem.wisc.edu/tut_del.htm
+
+NBO output from G16 Rev. B.01 is given in the accompanying .arc file.
+
+Users request NBO7 analysis using the 'nbo6' options of Gaussian's pop
+keyword (e.g. pop=npa6, nbo6, nbo6del, etc.)
+
+Keylist input for pop=nbo6read and pop=nbo6del can be distributed
+across multiple lines of the Gaussian input file.  NBO input is
+terminated by a blank line.  Thus, keylist input may appear as
+follows:
+
+   $nbo  steric  $end
+   $del
+     delete 1 element 3 11
+   $end
+   <blank line>
+
+Note that a blank line should not be used to separate the different
+keylists ($nbo and $del, in this example).  Inserting a blank line in
+the input before the $del keylist would result in Gaussian only
+forwarding the $nbo input to NBO7, neglecting the $del input and
+preventing the program from performing deletions analysis.
+
+Last modified: 2-Sep-2019

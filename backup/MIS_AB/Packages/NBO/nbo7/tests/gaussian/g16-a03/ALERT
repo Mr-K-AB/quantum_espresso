@@ -1,0 +1,9 @@
+
+Alert -- for G16 A.03 only.
+
+NBO deletions (pop=nbo6del) fail with G16 A.03 unless you use a
+non-standard route.  This is fixed in G16 post-A.03.  See
+nbo7/tests/gaussian/g16-a03/DELETIONS for instructions for preparing
+non-standard routes for deletions with G16 A.03.  Sample non-standard
+routes are also shown in am1.com, ch3.com, ch3nh2.com, and tutdel.com.
+

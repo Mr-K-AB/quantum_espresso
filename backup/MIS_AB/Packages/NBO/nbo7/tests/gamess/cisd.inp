@@ -1,0 +1,16 @@
+ $contrl  cityp=guga  scftyp=rhf  runtyp=energy  coord=zmt  $end
+ $basis  gbasis=n21  ngauss=3  $end
+ $cidrt  group=c1  iexcit=2  nfzc=2  ndoc=7  nval=19  $end
+ $nbo  $end
+ $data
+Methylamine...cisd/3-21g//Pople-Gordon idealized geometry
+Cs
+
+C
+N  1  1.47
+H  1  1.09  2  109.4712
+H  1  1.09  2  109.4712  3  120. 0
+H  1  1.09  2  109.4712  3  240. 0
+H  2  1.01  1  109.4712  3   60. 0
+H  2  1.01  1  109.4712  3  300. 0
+ $end

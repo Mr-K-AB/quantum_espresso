@@ -1,0 +1,227 @@
+
+1.  Parallel NRT
+2.  Multi-Threading
+3.  Stack Memory
+4.  Scratch Memory
+5.  Performance
+
+Warning for Linux binary distribution licensees: Your 64-bit NBO7
+executable (nbo7.i8.exe) is statically linked using a work-around that
+avoids a limitation of the GNU OpenMP implementation.  GNU notes that
+the work-around is not fully supported by its compilers and is thus
+not recommended.  However, we have not identified any test case for
+which statically-linked nbo7.i8.exe fails.  Thus, we have decided to
+provide a 64-bit NBO7 executable in the binary distribution that is
+linked using the work-around.
+
+If you encounter a 64-bit (i8) NBO calculation that mysteriously fails
+in NRT analysis we recommend the following:
+
+ * Forward a copy of your input and output files to Eric Glendening
+   (glendening@indstate.edu).  He may be able to diagnose the problem.
+
+ * Consider upgrading your binary NBO7 license to source (contact the
+   NBO Business Office at tcinbo@chem.wisc.edu).  Source license
+   holders build their own dynamically-linked NBO executables that
+   avoid the issue with static OpenMP.
+
+----------------
+1.  Parallel NRT
+----------------
+
+The natural resonance theory (NRT) module of the NBO program is
+parallelized as of release 7.0.10 for Linux and MacOS.  The most
+time-consuming tasks in NRT include (i) the calculation of candidate
+resonance structures and (ii) the construction of the Gram matrix for
+optimization of the resonance weights.  Both of these tasks are now
+performed in parallel and benefit considerably from multiple threads
+working simultaneously with large amounts of memory.
+
+Two environment variables (OMP_NUM_THREADS and OMP_STACKSIZE) are used
+to specify resources for parallel NRT calculations.  Efficient
+calculations may also require that the user allocate extra scratch
+memory (see the MEMORY keyword of the $NBO keylist).
+
+Parallel NRT is implemented in the 64-bit NBO program using the OpenMP
+4.0 standard.  Parallel NRT is not available in the 32-bit program.
+
+-------------------
+2.  Multi-Threading
+-------------------
+
+By default, NRT executes a single thread (i.e. in serial mode).
+Multiple threads are requested by setting the OMP_NUM_THREADS
+environment variable.  For example, the following setenv or export
+command specifies a 16-thread calculation.
+
+   setenv OMP_NUM_THREADS 16   (for tcsh)
+   export OMP_NUM_THREADS=16   (for bash)
+
+NRT manages a master list of bond patterns to be searched.  The search
+is distributed across threads.  Each thread receives a proposed bond
+pattern from the master list and then calculates resonance structures
+consistent with that pattern.  A resonance structure is a unique set
+of bonding and non-bonding NBOs that reflects the bond pattern.  The
+thread returns all resonance structures to NRT and is then assigned
+the next bond pattern in the master list, if additional patterns
+remain to be searched.
+
+The gennbo (tcsh) and gennbo.sh (bash) scripts for standalone GenNBO
+calculations allow the user to specify the number of threads as the
+second input argument.  For example,
+
+   gennbo ch3nh2 4
+   gennbo.sh ch3nh2 4
+
+performs NRT analysis using four threads.  Examine the scripts to see
+how the OMP_NUM_THREADS variable is set in each.
+
+You will have to similarly set the OMP_NUM_THREADS variable to run
+parallel NRT when the NBO program is interfaced to an electronic
+structure system (ESS) like Gaussian or Orca.  This should likely be
+handled by the script you use to submit ESS calculations.  Seek
+assistance from your system administrator if it is not clear how to
+set environment variables in your script.
+
+----------------
+3.  Stack Memory
+----------------
+
+'Stack' is memory assigned to a specific thread for storing local
+variables.  Most operating systems limit the default stack to only 8MB
+per thread.  Because each thread in parallel NRT is essentially
+performing an independent NBO search, the thread requires access to
+its own local NBO arrays and data structures, which are extensive.  We
+generally find that a 50MB stack is required for the smallest NRT
+applications.  A 100MB stack is sufficient for most calculations.
+
+As mentioned, the maximum stack size for your operating system may be
+severely limited.  Before running parallel NRT you will likely have to
+increase the stack size limit.  This is accomplished using the limit
+command in tcsh or the ulimit command in bash.  For example, the
+following commands set the stack size limit to 256MB (=262144KB):
+
+    limit stacksize 262144  (for tcsh)
+    ulimit -s 262144        (for bash)
+
+In tcsh you can alternatively choose to "unlimit" the stack size:
+
+    limit stacksize unlimited
+
+Examine the gennbo and gennbo.sh scripts for GenNBO calculations for
+examples that show how to increase stack size limits.  The gaunbo6 and
+gaunbo7 tcsh scripts in nbo6/bin use the limit command to set the
+maximum stack size for NBO7 calculations with Gaussian.
+
+The specific stack size used by the NBO program is set using the
+OMP_STACKSIZE environment variable as follows:
+
+    setenv OMP_STACKSIZE 64M  (64MB stack for tcsh)
+    export OMP_STACKSIZE=64M  (64MB stack for bash)
+
+OMP_STACKSIZE cannot exceed the stack size limit for the operating
+system that is set by the limit or ulimit command (as described
+above).  OMP_STACKSIZE sets the size of stack memory allocated to each
+thread of the multi-threaded process.  So the above environment
+variable for a 16-thread calculation would allocate a total of 1GB
+stack memory for the NBO program, that is, 64MB for each of the 16
+threads.
+
+By default, the gennbo and gennbo.sh scripts for GenNBO calculations
+set the stacksize to 256MB, which is sufficient for every calculation
+we have attempted, including those for large molecules with extended
+basis sets and tens of thousands of resonance structures.  Stack sizes
+are similarly set to 256MB in the gaunbo6 and gaunbo7 scripts for
+Gaussian calculations.  For other ESSs you will have to set
+OMP_STACKSIZE in the script used for submitting your calculations.
+Seek assistance from your system administrator if it is not clear how
+to do this.
+
+NRT output reports the stack size specified by OMP_STACKSIZE and the
+estimated demand for stack memory in the calculation.  For example,
+the following is reported for NRT analysis of the ch3nh2.47
+calculation in the nbo7 root directory:
+
+         OMP stack size/thread:  256M (46M estimated demand)
+
+Although 256MB of stack memory is allocated per thread, this small NRT
+calculation only uses about 46MB per thread.
+
+NRT analysis will fail, likely with no warning message, if there is
+insufficient stack memory assigned to the threads to complete the
+calculation.
+
+--------------
+Scratch Memory
+--------------
+
+Allocating a large amount of scratch memory can considerably speed up
+NRT calculations when hundreds or thousands of resonance structures
+are generated.  Extra memory is allocated using the MEMORY keyword in
+$NBO keylist input.  For example,
+
+   $nbo  nrt  memory=8gb  $end
+
+Large memory allows NRT to construct the Gram matrix for resonance
+weight optimization using an 'in-core' algorithm, rather than
+repeatedly reading resonance density matrices for hundreds or
+thousands of structures from disk.
+
+NRT uses as much scratch memory as available for the in-core
+calculation; it only resorts to a disk-based calculation when scratch
+memory is exhausted.  Upon switching to the disk-based calculation NRT
+writes an informational message reporting the amount of memory that
+would have been required to complete the calculation entirely in-core.
+The total amount of scratch memory used in the NBO calculation is
+reported at the end of NBO output.
+
+---------------
+5.  Performance
+---------------
+
+We provide sample performance data for NRT analysis of caffeine.
+GenNBO calculations are performed on the B3LYP/6-311++G** optimized
+geometry.  $NBO keylist input for the calculation is:
+
+   $nbo  nrt  memory=8gb  $end
+
+The serial calculation completes in 9083 sec (wall time).  Parallel
+calculations for p threads required the following wall times:
+
+     p     wall(sec)      E
+   --------------------------
+     1       9083       1.00
+     2       5052       0.90
+     4       2823       0.80
+     8       1669       0.68
+    12       1310       0.58
+    16       1124       0.51
+    20       1038       0.44
+    32       1071       0.27
+   -------------------------
+
+The efficiency is t(serial)/[p x t(parallel)], where t(serial) is the
+wall time for the serial calculation and t(parallel) is the wall time
+for the parallel calculation with p threads.  Ideally, if the
+efficiency were 1.00 for all calculations, the wall time would
+decrease in proportion to 1/p as the number of threads increases.
+
+Our experience is that there is reasonable reduction in wall time for
+parallel NRT when using up to 16-20 threads.  Allocating more than 20
+threads rarely reduces wall time and, in fact, often increases it.
+
+These are some details pertaining to these calculation:
+
+ * There are 377 basis functions for 6-311++G** caffeine, after
+   eliminating one linearly dependent s function.
+ * NRT generates 11518 resonance stuctures (unique Lewis sets of
+   bonding and nonbonding NBOs) from 451912 searches of 7823 bonding
+   patterns.
+ * The alternating search for structures and optimization of resonance
+   weights requires 21 cycles to converge.
+ * The calculation only uses about 2.2GB of the 8GB of scratch memory
+   allocated.  The calculation uses an estimated 59MB of stack memory
+   of the 256MB allocated per thread.
+ * The calculations are performed on a pair of Intel Xeon E5-2680V2
+   processors (20 cores/40 threads total, 25MB cache per core)
+   operating at 2.80 GHz with 128GB total memory.

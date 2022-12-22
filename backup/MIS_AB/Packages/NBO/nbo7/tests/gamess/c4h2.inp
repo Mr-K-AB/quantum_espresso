@@ -1,0 +1,12 @@
+ $contrl  scftyp=rhf  runtyp=energy  ispher=1  $end
+ $basis  gbasis=n311  ngauss=6  ndfunc=1  npfunc=1  diffsp=.t.  diffs=.t.  $end
+ $nbo  $end
+ $del  lewis  $end
+ $data
+Butadiyne...rhf/6-311++g**
+Dnh 4
+
+C    6.    0.000000    0.000000    0.693074
+C    6.    0.000000    0.000000    1.878441
+H    1.    0.000000    0.000000    2.933869
+ $end

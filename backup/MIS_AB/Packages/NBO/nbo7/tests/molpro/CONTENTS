@@ -1,0 +1,40 @@
+
+Contents of the nbo7/tests/molpro directory include:
+
+molpro/
+|-- CONTENTS          this file
+|-- c4h2.com          linearly-dependent basis set
+|-- ch3.com           unrestricted open-shell
+|-- ch3nh2.com        methylamine example from NBO7 Manual
+|-- cisd.com          CI density
+|-- h2o.com           extended basis set calculation
+|-- mp2.com           MP2 density
+|-- multi.com         CAS density
+|-- npa.com           NPA only
+|-- npepa.com         NPEPA analysis
+|-- rohf.com          restricted open-shell
+`-- save.com          save NBOs
+
+NBO output from Molpro 2018.3 is given in the accompanying .arc files.
+
+Default NPA (only) and NBO analyses can be requested in Molpro input
+using the
+
+    npa6;
+    nbo6;
+
+directives.  Note that these '6' directives work equally well for NBO6
+(now obsolete) and NBO7.
+
+Use the 'density' option to select the desired density (other than the
+default) for analysis,
+
+    {nbo6;density,2150.2,state=1.1;}
+
+and the 'save' option to return orbital sets (e.g. NBOs, NLMOs) to
+Molpro
+
+    {nbo6;save,nbo,2101.2;}
+
+
+Last updated: 22-Nov-2018

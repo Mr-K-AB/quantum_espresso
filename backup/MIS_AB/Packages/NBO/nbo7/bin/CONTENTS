@@ -1,0 +1,52 @@
+
+Contents of the nbo7/bin directory include some, or all, of the
+following:
+
+bin/
+|-- CONTENTS          this file
+|-- gaunbo6           tcsh script for G09 Rev.D-E and G16 Rev.A-B
+|-- gaunbo7           tcsh script for G16 Rev.C
+|-- g09nbo.i4.exe     interface for G09 Rev.D-E (32-bit integer)
+|-- g09nbo.i8.exe     interface for G09 Rev.D-E (64-bit integer)
+|-- g09nbo.i4.F       interface for G09 Rev.A-C (32-bit integer)
+|-- g09nbo.i8.F       interface for G09 Rev.A-C (64-bit integer)
+|-- g16nbo.i4.exe     interface for G16 (32-bit integer)
+|-- g16nbo.i8.exe     interface for G16 (64-bit integer)
+!-- gennbo            tcsh script for running GenNBO
+|-- gennbo.i4.exe     GenNBO host program for NBO7 (32-bit integer)
+|-- gennbo.i8.exe     GenNBO host program for NBO7 (64-bit integer)
+|-- gmsnbo.i4.a       linkable library for GAMESS [30-Sep-2020 R2]
+|-- gmsnbo.i8.a       linkable library for GAMESS [30-Sep-2020 R2]
+|-- nbhost.o          object code for G09 Rev.A-C installation
+|-- nbo7.i4.exe       NBO7 client executable (32-bit integer)
+`-- nbo7.i8.exe       NBO7 client executable (64-bit integer)
+
+The executables and libraries are compiled using the following
+Fortran and C compilers:
+
+   gfortran/gcc 5.5.0 -- nbo7.0-bin-linux-x64.tar.gz
+   gfortran/gcc 5.5.0 -- nbo7.0-bin-osx-x64.tar.gz
+
+See instructions in the nbo7/install subdirectory for information
+regarding the installation of NBO7 into various electronic structure
+systems.
+
+The following limits are set for the executables of the binary
+distribution:
+                    maximum number of atoms =  999
+          maximum number of basis functions = 9999
+    maximum number of basis function shells = 2000
+ maximum number of basis function exponents = 5000
+
+Users seeking to reconfigure these limits are encouraged to obtain the
+NBO7 source distribution.  Contact tcinbo@chem.wisc.edu.
+
+GenNBO and the G09/G16 interface programs are respectively configured
+with 50 Mwords and 100 Mwords of scratch memory.  These limits are
+fixed for 32-bit (i4) integer programs but can be dynamically changed
+for the 64-bit (i8) programs.  For the latter, see the NBOMEM
+environment variable for the interface programs (GenNBO, G09NBO, and
+G16NBO) and the MEMORY keyword of the $NBO keylist for the NBO7
+program.
+
+Last updated: 27-Jan-2021

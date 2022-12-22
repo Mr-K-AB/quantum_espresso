@@ -1,0 +1,56 @@
+
+Contents of the nbo7/tests/gaussian/g16-c01 directory include:
+
+nbo7/tests/gaussian/g16-c01
+|-- CONTENTS          this file
+|-- am1.com           semiempirical calculation with deletions
+|-- b.11.3.1.com      see NBO7 Manual, B.11.3.1 and B.11.4.1
+|-- b.11.3.2.com      see NBO7 Manual, B.11.3.2 and B.11.4.2
+|-- b.11.3.3a.com     see NBO7 Manual, B.11.3.3 and B.11.4.3
+|-- b.11.3.3b.com     see NBO7 Manual, B.11.3.3 and B.11.4.3
+|-- b.11.3.4a.com     see NBO7 Manual, B.11.3.4 and B.11.4.4
+|-- b.11.3.4b.com     see NBO7 Manual, B.11.3.4 and B.11.4.4
+|-- b.11.3.5a.com     see NBO7 Manual, B.11.3.5 and B.11.4.5
+|-- b.11.3.5b.com     see NBO7 Manual, B.11.3.5 and B.11.4.5
+|-- b.11.3.5c.com     see NBO7 Manual, B.11.3.5 and B.11.4.5
+|-- c4h2.com          linearly-dependent basis set with deletions
+|-- casnbo.com        initial guess for CAS from NBO
+|-- ch3.com           open shell with deletions
+|-- ch3nh2.com        methylamine test case with deletions
+|-- cisd.com          NBO analysis of CI density
+|-- cuco.com          ECP calculation with NRT
+|-- dimer.com         B3LYP/NEDA for water dimer
+|-- freq.com          numerical frequencies with deletions
+|-- freq-ecl.com      numerical frequencies with deletions
+|-- h2ko+.com         NEDA with an ECP
+|-- h2o.com           extended basis set calculation
+|-- mp2.com           NBO analysis of MP2 density
+|-- nbcp.com          NBCP analysis
+|-- ncs.com           NMR properties with NCS
+|-- npa.com           NPA only
+|-- npepa.com         NPEPA calculation
+|-- opt.com           NBO analysis with geometry optimization
+|-- reopt.com         numerical optimization with deletions
+|-- reopt-ecl.com     numerical optimization with deletions
+|-- save.com          checkpoint NBOs (savenbos)
+`-- tutdel.com        See http://nbo7.chem.wisc.edu/tut_del.htm
+
+NBO output from G16 Rev. C.01 is given in the accompanying .arc file.
+
+Keylist input for pop=nbo7read and pop=nbo7del can be distributed
+across multiple lines of the Gaussian input file.  NBO input is
+terminated by a blank line.  Thus, keylist input may appear as
+follows:
+
+   $nbo  steric  $end
+   $del
+     delete 1 element 3 11
+   $end
+   <blank line>
+
+Note that a blank line should not be used to separate the different
+keylists ($nbo and $del, in this example).  Inserting a blank line in
+the input before the $del keylist would result in Gaussian only
+forwarding the $nbo input to NBO7, neglecting the $del input and
+preventing the program from performing deletions analysis.
+

@@ -1,0 +1,15 @@
+ $contrl  dfttyp=b3lyp  scftyp=rhf  runtyp=energy  nosym=1  ispher=1
+    $end
+ $basis  gbasis=acct  $end
+ $nbo  $end
+ $del  neda end  $end
+ $data
+water dimer (geometry of C3 water trimer)
+C1
+Oxygen     8.    -0.957406    1.304375   -0.091870
+Hydrogen   1.     0.014172    1.244266   -0.037940
+Hydrogen   1.    -1.225393    1.975012    0.541376
+Oxygen     8.     1.608343    0.176994   -0.091952
+Hydrogen   1.     1.070533   -0.634390   -0.038105
+Hydrogen   1.     2.322945    0.073834    0.541511
+ $end

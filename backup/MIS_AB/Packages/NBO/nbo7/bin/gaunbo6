@@ -1,0 +1,162 @@
+#!/bin/tcsh -f
+
+#  [Having problems getting NBO to run with Gaussian?  See below.]
+
+#  See nbo7/tests/gaussian/g16-a03/ALERT for G16 A.03 limitations.
+
+#  Use this script (gaunbo6) to perform NBO7 analysis with G09
+#  D.01/E.01 and with G16 A.03/B.01.  Use the gaunbo7 script with G16
+#  C.01 and later revisions.
+
+#  Ensure that the directory containing this script is present in the
+#  user's path during the Gaussian calculation.  Alternatively, it
+#  generally works well to simply copy this file to $g09root/g09 or
+#  $g16root/g16, and edit it as described below.
+
+#  Inspect and set, as appropriate, the following environment
+#  variables.
+
+#  Select Gaussian interface (g09nbo or g16nbo):
+
+setenv GAUNBO g16nbo
+
+
+
+
+
+
+
+
+
+
+
+#  Specify NBO7 executable directory:
+
+# *********************************************************************************************************************************
+# Absolute path hard coded
+setenv BINDIR $HOME/copied/MIS_AB/Packages/NBO/nbo7/bin
+# *********************************************************************************************************************************
+
+
+
+
+
+
+
+
+
+#  Set 64-bit (i8) or 32-bit (i4) integer representation (likely the
+#  former):
+
+setenv INT i8
+
+#  Optionally, for 64-bit integers only, set the amount of dynamically
+#  allocatable memory available to the Gaussian interface program.
+#  Memory is specified as an integer number of megawords (mw),
+#  megabytes (mb), or gigabytes (gb).
+
+#  Examples:
+
+#  setenv NBOMEM 50mw
+#  setenv NBOMEM 512mb
+#  setenv NBOMEM 1gb
+
+setenv NBOMEM 100mw
+
+#  The interface uses 100mw of memory if NBOMEM is not specified here.
+#  The interface ignores the NBOMEM environment variable for 32-bit
+#  integers and uses a fixed 100mw of memory.
+
+#  Note that the NBOMEM environment variable does not impact the
+#  amount of dynamically allocatable memory available to the NBO7
+#  client program.  Instead, memory in NBO7 is set by the MEMORY
+#  keyword of the $NBO keylist (see the NBO7 Manual).
+
+#  -------------------------------------------------------------------
+
+#  Environment variables for parallel NRT:
+
+#  Optionally set the number of threads to be used for parallel NRT
+#  calculations.  Note that it is probably more approriate to set this
+#  environment variable in the script that you use to submit your
+#  Gaussian calculations:
+
+#  setenv OMP_NUM_THREADS 8
+
+#  Optionally set the stacksize for the threads for parallel NRT
+#  calculations.  The stacksize can be specified in bytes (B),
+#  kilobytes (K), megabytes (M), or gigabtypes (B).  256MB per thread
+#  is usually sufficient.
+
+#  Examples:
+
+#  setenv OMP_STACKSIZE 268435456B
+#  setenv OMP_STACKSIZE 262144K
+setenv OMP_STACKSIZE 256M
+#  setenv OMP_STACKSIZE 1G
+
+#  Finally, the default stack size for the Linux or Mac operating
+#  systems may be too small for large calculations.  If your
+#  calculation fails with no warning, the problem may be that there is
+#  insufficient memory allocated to the stack.
+
+#  The following command shows, for the tcsh shell, how to set the
+#  maximum stack size to 128mb.  Note that the units for the limit
+#  command are in kb.
+
+#  limit stacksize 262144
+
+#  You can alternatively allow the stack to have unlimited size.
+
+limit stacksize unlimited
+
+#  -------------------------------------------------------------------
+
+#  If you are having problems getting NBO to execute with Gaussian, try
+#  the following:
+
+#  1.  Ensure that this script has execute permission.  If not, set
+#      the permission using 'chmod +x gaunbo6'.
+
+#  2.  Change the first line of this script to read '#!/bin/tcsh -fx'.
+#      Adding the "x" flag forces tcsh to echo each command in this
+#      script as the command is executed.  Are these commands echoed
+#      in your Gaussian output file?  If not Gaussian probably cannot
+#      find this script in your path.
+
+#  3.  Uncomment the following line, enabling verbose printing by the
+#      NBO program to the Gaussian output file.  If verbose printing
+#      does not begin by indicating that the Gaussian/NBO interface is
+#      starting, this script probably does not correctly identify the
+#      path to the NBO executable directory (NBOBIN).
+
+#  setenv NBODTL verbose
+
+#  -------------------------------------------------------------------
+
+#  The remainder of this script can be safely ignored.
+
+#  Set environment variables for files that transfer data between
+#  Gaussian and NBO7:
+
+@ narg = 0
+@ nfinp = 2 + $narg
+@ nfmsg = 4 + $narg
+@ nfchk = 5 + $narg
+@ nmat = 6 + $narg
+setenv inpfile  $argv[$nfinp]
+setenv fchkfile $argv[$nfchk]
+setenv matfile  $argv[$nmat]
+set tmp = $argv[$nfchk]
+set tmp = "$tmp:r"
+
+#  Specify the NBO7 executable, and set the default filename:
+
+setenv NBOEXE $BINDIR/nbo7.$INT.exe
+setenv NBOFIL $tmp
+
+#  Execute the Gaussian/NBO7 interface:
+
+unlimit core
+$BINDIR/$GAUNBO.$INT.exe
+

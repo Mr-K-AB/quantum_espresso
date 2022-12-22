@@ -1,0 +1,186 @@
+27-Jan-2021  Parallel NRT implemented (but not for Windows)
+15-Dec-2020  Rewrite portions of G09NBO, G16NBO, and NEDA that confuse
+             gfortran 7-9 (and perhaps 6).
+ 4-Dec-2020  Disable symmetry when conflicts occur
+21-Jul-2020  Evaluate NRT formal charges
+20-Jul-2020  Unlimit NRT cycles by default
+10-Jul-2020  Tighten threshold for determining point group symmetry
+ 1-Jul-2020  Support Intel Xeon, Core2, AMD for NBO7W
+19-Jun-2020  Charge default diagonalizer from SVD to tridiagonal
+ 9-Jun-2020  Fix GenNBO for DOS-formatted FILE47 with Portland Group
+ 8-Jun-2020  Add RNBO labels to FILE46
+30-May-2020  Fix NaN issues with SVD diagonalizer
+20-May-2020  Implement dynamic memory allocation (environment variable
+             NBOMEM) for GenNBO, G09NBO, and G16NBO interface programs
+13-May-2020  Fix Th point group symmetry
+ 5-Apr-2020  Print selected resonance structures using NRTPR
+22-Mar-2020  Fix normalization issue with RNBOs
+11-Mar-2020  Ensure NLMO rotations move density into Lewis orbitals
+10-Mar-2020  Change default diagonalizer from Jacobi to SVD
+22-Jan-2020  G16NBO interface handles up to 4000 basis functions
+21-Jan-2020  Fix electron leakage in FIXDM
+19-Jan-2020  Resolve linear dependence discarding symmetry-equivalent
+             shells on PNAOs
+19-Nov-2019  Reduce tolerence for linear dependence in OWSO to 1e-13
+ 8-Sep-2019  Fix NEDA for G16W C.01
+ 1-Sep-2019  Generate long-bonded structures using NRTLONG
+27-Aug-2019  Add missing gaunbo7 script to bin distributions
+18-Jul-2019  Fix a few print bugs in NPEPA
+ 8-Jun-2019  Fix S2n point group symmetry
+ 3-Jun-2019  NEDA implemented with G16 Rev C.01
+17-May-2019  Revert to C1 symmetry in NRT on symmetry failure
+28-Mar-2019  Revert to gfortran 5.5 for Linux and OSX
+30-Jan-2019  Disable query for $NPEPA in Orca
+ 2-Jan-2019  Fix dynamic memory allocation for i8 NBO7 under Windows
+13-Dec-2018  Disable query for $NPEPA in Molpro
+23-Nov-2018  Fix open-shell NRT covalencies and electrovalencies
+15-Nov-2018  NBO7 release
+16-May-2018  Discard DAF on failure
+23-Apr-2018  Exact hybrid projection used in NBO search algorithms
+31-Mar-2018  Fix $CHOOSE failure
+24-Mar-2018  G09NBO and G16NBO interfaces made more memory efficient
+17-Mar-2018  Fix integer*8 Hollerith issues with labels
+11-Mar-2018  G16NBO interface is compatible with G16 B.01
+28-Feb-2018  Total density (not spin densities) determines NAO labels
+20-Feb-2018  Established standard for AO normalizations for FILE31
+14-Feb-2018  Fix small bug in Cartesian h transformation
+25-Jan-2018  XML=PRINT writes XML output to the NBO output file
+23-Jan-2018  Enable h functions for GAMESS/NBO6 interface
+ 2-Jan-2018  Enable $INCLUDE files in FILE47 input for gennbo
+ 2-Jan-2018  Replace BD/BD* Lewis orbitals by LP/LP using directed
+             search
+ 2-Jan-2018  Implement MOLUNIT molecular units keyword
+ 1-Dec-2017  Fix error in NAODTL orthogonality tests
+ 6-Nov-2017  Corrected evaluation of D(W) in NRT
+ 4-Nov-2017  Tighten NAO threshold to avoid discarding occupied MOs
+ 4-Sep-2017  Reset minimum occupancy threshold for NBO search to 1.5
+ 4-Sep-2017  Write FILE47 with i6 integers
+15-Aug-2017  Fix NRTLST keyword
+23-Jun-2017  Write $NRTSTR keylists to external file on request (NRTSTR)
+14-Jun-2017  Discard spherical contaminants from GAMESS densities
+ 7-May-2017  Copy FILE from $NBO to archive file
+ 3-Feb-2017  Remove spurious NAO energies from open-shell SCF analysis
+ 7-Jan-2017  Modified NAO algorithm is now the default.  The algorithm
+             orthogonalizes core before valence before Rydberg orbitals
+ 3-Nov-2016  Fix parsing of matrix element file for Gaussian-16
+26-Oct-2016  Fix open-shell covalency and electrovalency values for
+             diatomics
+ 1-Sep-2016  Implement dynamic memory allocation
+10-Jul-2016  Avoid excessively long NBO searches by limiting number
+             of bonding patterns considered; modify algorithm for
+             hybrid projection
+10-Jun-2016  Re-implement APOLAR bonds
+ 8-Jun-2016  Update periodic table
+ 3-Jun-2016  Fix basis function labels in deletions analysis
+11-May-2016  Fix basis function issues for NWChem's NBOFILE
+22-Apr-2016  Fix linear dependence in strongly delocalized systems
+15-Apr-2016  Fix unpacking of symmetric matrices
+17-Mar-2016  Improved NBO search for strongly delocalized systems
+14-Mar-2016  Disable options when FILE47 datalists are bogus
+16-Feb-2016  $CORE keylist controls core-valence NAO partitioning
+ 9-Feb-2016  Support building NBO6 with MinGW
+16-Jan-2016  OSX binary distribution uses static quadmath library
+22-Jan-2016  Increase number of iterations allowed to converge NLMO
+22-Nov-2015  GenNBO detects missing basis function coefficients
+20-Oct-2015  Fix undefined reference to halt in GAMESS library
+14-Sep-2015  Fix minor logic error in CHOOSE directed search
+11-Sep-2015  Fix blank line issue in FILE47 parsing
+ 9-Aug-2015  Implement more efficient parsing of FILE47 for GenNBO
+28-Jul-2015  NCS can optionally use NBO5-style bracketed '< >' input
+ 2-Jul-2015  Slight reformatting of the AOINFO file (FILE31)
+29-Jun-2015  Fix confusion with "-0" values in message passing
+16-Jun-2015  Fix fast transformations for linearly dependent basis sets
+12-May-2015  Fix ALPHA and BETA labels in PLOT files
+20-Apr-2015  Fix dimensioning issue in NBODRV
+ 9-Mar-2015  Fix FORMAT edit descriptor issue for pgf77
+ 7-Mar-2015  Fix parsing of $CORE keylist
+27-Feb-2015  Fix fast transformations for AOs not ordered by atom
+15-Feb-2015  Decrease default hybrid projection threshold (0.2->0.1)
+12-Feb-2015  Fix PROP analysis (e-corr values for SCF) using JACOBI
+26-Nov-2014  Add higher precision FILE47 format (FORMAT=PRECISE)
+16-Nov-2014  Default NBO search no longer minimizes numbers of high
+             occupancy non-Lewis (NL) and low occupancy Lewis (L)
+             orbitals; search only seeks to minimize the NL density
+13-Nov-2014  Remove MAXATM, MAXBAS, MAXSHL contraints from G09NBO
+ 9-Nov-2014  Modify NATHYB to address degeneracies in default NBO search
+ 8-Nov-2014  Fix DIPOLE output for NATOMS>99
+ 7-Nov-2014  Fix segmentation faults in NBO deletions output
+29-Oct-2014  Fix DETAILed printing for STERIC analysis
+26-Oct-2014  Fix core table for large core lanthanides
+20-Oct-2014  Trap end-of-files in GenNBO
+15-Oct-2014  Fix open-shell FIXDM
+12-Oct-2014  Fix phase issue in basis set conversion; fixes NBCP
+ 2-Oct-2014  Fix hybrid projection for strongly overlapping hybrids
+21-Sep-2014  Correct argument mismatch in UCASE; fixes sluggish NBO6W
+ 4-Sep-2014  Fix segmentation fault for highly extended basis sets
+14-Aug-2014  Fix parsing of $NBO keylist
+ 7-Aug-2014  Fix dimensioning issue with directionality table
+12-Jul-2014  Add CML and MOL output (see NBOCML and NBOMOL)
+ 6-Jul-2014  Add support for LAPACK
+ 4-Jul-2014  Add RADICAL effective unpaired electron distribution
+ 3-Jul-2014  Redefine NOFFMX to avoid potential overflow in NLMO
+25-Jun-2014  Hybrid directionality now based on locations of highest
+             hybrid density
+14-Jun-2014  Remove (phase-dependent) NAO bond orders
+ 8-May-2014  Add Molden formatted output (see MOLDEN)
+14-Apr-2014  Add non-bonding electron pairs to NRTCML output
+14-Apr-2014  Separate NRTCML files for alpha/beta spin
+13-Apr-2014  Redimension MAXATM (=500) and MAXBAS (=5000)
+12-Apr-2014  Restrict branching algorithm in NRT by controlling depth
+             of search
+16-Mar-2014  Reorganize the directory structure of the NBO6 distribution
+12-Mar-2014  Add abbreviated NEDA input [e.g. $del neda (1) (2-4) $end]
+ 8-Mar-2014  Extend Mulliken population analysis to i functions
+ 3-Mar-2014  Warn that equal signs cannot be used in Molpro $NBO input
+ 2-Mar-2014  Do not print title if none is provided
+18-Feb-2014  Analyze correlated densities with GAMESS
+16-Feb-2014  Fix NRT with DETAIL failure
+ 9-Feb-2014  Fix labels for multi-center NLMOs
+31-Jan-2014  Ensure that NBOs from CHOOSE are not too strongly polarized
+19-Jan-2014  Fix G09 checkpointing for linearly dependent AO basis sets
+ 6-Jan-2014  Fix batch processing of GIAO matrices in G09NBO interface
+ 5-Jan-2014  Implement branching in CHOOSE/NRT
+ 4-Jan-2014  Extend memory for G09NBO interface
+26-Dec-2013  Calculate NOs with PLOT option
+29-Nov-2013  Enable NCS for Gaussian for spherical basis sets
+28-Nov-2013  Reset label indices for LV NBOs
+28-Nov-2013  Update NLMO algorithm.  Disable swapping of L/NL NBOs, allow
+             for multiple passes over the DM, orthogonalize NLMOs, and add
+             DETAIL output
+26-Nov-2013  Restore GIAO tensor matrices to FILE47
+24-Nov-2013  Disable NCS for Gaussian for spherical basis sets.  Enable NCS
+             by default for Gaussian NMR calculations.  
+17-Nov-2013  Recalculate LC exchange integrals for GAMESS/NEDA, as needed
+12-Nov-2013  Fix mishandled memory in FEH11
+ 5-Nov-2013  Fix n-center NBO labels
+ 5-Nuv-2013  Ghost atoms with no basis functions are not molecular units
+ 2-Nov-2013  Skip NBO analysis for GAMESS when $NBO is missing
+29-Oct-2013  Fix indices for NBO labels in ACCEPT to correct SECRES error
+26-Oct-2013  Fix selection of Lewis orbitals in NEWDM; NEDA populates Lewis
+             orbitals, not necessarily those of lowest energy
+21-Oct-2013  Normalize Schmidt orthogonalized functions in NAO
+19-Oct-2013  Fix dimensioning issue in NAO for extended basis sets
+18-Oct-2013  Fix labels for general matrix output
+12-Oct-2013  Query nuclear charges for ghost atoms
+ 5-Oct-2013  Reorganize DAF records to support up to 250 reference structures
+             for NRT
+26-Sep-2013  Restrict default NBO search to no more than three centers
+23-Sep-2013  Eliminate overlapping dummy arguments in VCOPY in GenNBO
+22-Sep-2013  G09NBO uses NBOFIL for DAF filename, and FILE for other filenames
+15-Sep-2013  Convert basis functions to expected form (fixes NBCP, PLOT, AOINFO,
+             and NJC)
+04-Aug-2013  Implement fast algorithm for NBO projection of NHO density
+02-Aug-2013  Reevaluate NAO DM in FEDAF after FIXDM
+01-Aug-2013  G09NBO passes square (not rectangular) AOMO matrix
+25-Jul-2013  Add HIGH keyword to print scratch memory high water marks
+24-Jul-2013  Fix out-of-bounds write for large NEDA calculations
+23-Jul-2013  Eliminate spurious orbital interactions in AO Fock matrix when
+             spherical functions are used by GAMESS
+18-Jul-2013  Add job timing (TIME) option to Make.config
+16-Jul-2013  Use TOPO vector to guide NBO search in CHOOSE
+11-Jul-2013  Fix bug in GenNBO handling of $CONTRACT
+06-Jul-2013  Implement fast algorithm for NHO projection of NAO density
+05-Jul-2013  Enable checkpointing in NBO6 with G09 Rev C.01
+05-Jul-2013  Fix checkpointing of AONO and AOMO transformations
+03-Jul-2013  Use dynamic memory allocation in G09NBO for Rev D.01
+02-Jul-2013  Fix analysis of semi-empirical densities in G09 Rev C.01

@@ -1,0 +1,16 @@
+ $contrl  scftyp=uhf  runtyp=energy  mult=2  nosym=1  $end
+ $dft  dfttyp=b3lyp  $end
+ $basis  gbasis=n31  ngauss=6  ndfunc=1  npfunc=1  diffsp=.t.  diffs=.t.  $end
+ $nbo  $end
+ $del
+   alpha neda end
+    beta neda end
+ $end
+ $data
+Na..OH2 (rhf/6-31++G**)
+Cnv 2
+
+ Na         11.0    .0000000000    .0000000000   -.3404656616
+ O           8.0    .0000000000    .0000000000   2.0240196206
+ H           1.0    .0000000000    .7627333242   2.5832459068
+ $end

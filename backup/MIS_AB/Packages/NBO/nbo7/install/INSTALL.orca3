@@ -1,0 +1,28 @@
+
+------------------------------
+Orca 3/NBO7 Installation Guide
+------------------------------
+
+To use NBO7 with Orca 3.0:
+
+ * install Orca as described in the Orca documentation
+
+ * install NBO7 as described in nbo7/README
+
+ * set environment variables GENEXE and NBOEXE
+
+   setenv GENEXE /path/to/nbo7/bin/gennbo.i8.exe
+   setenv NBOEXE /path/to/nbo7/bin/nbo7.i8.exe
+
+Orca's NBO and NPA keywords direct Orca to write a FILE47 (archive)
+file that is then passed to GenNBO.  Output from GenNBO is printed in
+the Orca output file.  The archive file is retained at the end of the
+calculation and can be used for subsequent analysis with GenNBO.
+
+Deletions and natural energy decomposition analysis are not supported
+by Orca.
+
+Sample input (.inp) and output (.arc) files are given in
+nbo7/tests/orca.
+
+Last updated: 11-Jul-2014
