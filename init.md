@@ -35,8 +35,6 @@ nano ~/.bashrc
 ```
 add `export PATH=$PATH:/<path to bin of espresso's folder>`
 
-ctrl + s
-
 ctrl + x
 
 y
