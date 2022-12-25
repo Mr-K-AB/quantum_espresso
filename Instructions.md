@@ -21,6 +21,7 @@ sudo apt-get install libblas-dev
 ```bash
 bash configure --enable-openmp
 ```
+
 <https://www.youtube.com/watch?v=pp8JeiZFVXs>
 
 run ```bash configure``` in the directory to which Espresso is extracted.
@@ -39,7 +40,7 @@ source ~/.bashrc
 
 with this, `pw.x` or any other executable of Quantum Espresso can be called directly from any directory of the user.
 
-edit bashrc, add "EXPORT PATH " with <path>/pw.x as variable
+edit bashrc, add "EXPORT PATH " with .<path_>/pw.x as variable
 
 ### pw.x  : executable of espresso, in the /bin folder of espresso installation location
 
