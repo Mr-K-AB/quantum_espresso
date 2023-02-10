@@ -1,6 +1,0 @@
- &bands
-    prefix  = 'silicon'
-    outdir = '/home/paulatto/espresso/tempdir/'
-    filband = 'sibands.dat'
-    lsym=.false.,
- /

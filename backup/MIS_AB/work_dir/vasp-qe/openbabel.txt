@@ -1,8 +1,0 @@
-https://atomsk.univ-lille.fr/
-
-snap install openbabel
-https://openbabel.org/wiki/Category:Installation
-
-
-https://lists.quantum-espresso.org/pipermail/users/2020-May/044534.html
-https://www.materialscloud.org/work/tools/qeinputgenerator

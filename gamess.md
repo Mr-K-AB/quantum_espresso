@@ -19,3 +19,18 @@ Load modules:
 
 + HDF5
 + Cmake
++ mvapich2
+
+## asdf
+
+linux64
+gfortran
+6.3
+
+openblas
+mpich
+
+https://www.youtube.com/watch?v=GQTGInS4pSU
+
+https://gitlab.com/libeigen/eigen.git
+

@@ -1,5 +1,0 @@
-(defun $module-$card_uc ()
-  (interactive)
-  (let ((flag '($card_flags_elist)))
-    (insert "$card " (ido-completing-read "Select the flag: " flag)))
-    (newline 1))
